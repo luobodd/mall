@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.MemberCartMapper">
+    <insert id="insertProduct" parameterType="memberCart">
+        INSERT INTO member_cart(memberId,productId,productInCartNumber) VALUES (#{memberId},#{productId},#{productInCartNumber})
+    </insert>
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM member_cart WHERE productId=#{productId} AND memberId=#{memberId}
+    </delete>
+    <select id="memberCartList" parameterType="int" resultType="map">
+        SELECT * FROM product, member_cart,brand WHERE member_cart.productId=product.productId AND product.brandId=brand.brandId AND member_cart.memberId=#{memberId};
+    </select>
+    <update id="updateMemberInCartProductNumber" parameterType="int">
+        UPDATE member_cart SET productInCartNumber=#{productInCartNumber} WHERE memberId=#{memberId} AND productId=#{productId};
+    </update>
+    <select id="queryMemberCartPrice" parameterType="int" resultType="double">
+        SELECT sum(productPrice*productInCartNumber) productPrices
+        FROM product, member_cart
+        WHERE member_cart.productId=product.productId AND memberId=#{memberId}
+    </select>
+    <delete id="deleteMemberCart" parameterType="int">
+        DELETE FROM member_cart WHERE memberId=#{memberId}
+    </delete>
+
+</mapper>

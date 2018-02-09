@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.AddressMapper">
+    <select id="queryMemberAddress" resultType="address">
+        SELECT * FROM address WHERE memberId=#{memberId}
+    </select>
+    <insert id="insertMemberAddress" parameterType="address">
+        INSERT INTO address(memberId, addressName, addressTel) VALUES (#{memberId},#{addressName},#{addressTel})
+    </insert>
+    <insert id="deleteMemberAddress" parameterType="int">
+        DELETE FROM address WHERE memberId=#{memberId} AND addressId=#{addressId}
+    </insert>
+</mapper>

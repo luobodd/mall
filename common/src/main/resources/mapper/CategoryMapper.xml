@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.CategoryMapper">
+    <select id="categoryList" resultType="category">
+        SELECT * FROM category WHERE 1=1
+    </select>
+    <insert id="addCategory" parameterType="category">
+        INSERT INTO category(categoryName) VALUES (#{categoryName})
+    </insert>
+    <select id="queryCategory" resultType="category">
+        SELECT * FROM category WHERE categoryId=#{categoryId}
+    </select>
+    <update id="editCategory" parameterType="category">
+        UPDATE category SET categoryName=#{categoryName} WHERE categoryId=#{categoryId}
+    </update>
+</mapper>

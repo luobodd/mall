@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.BrandMapper">
+    <select id="brandList" resultType="brand">
+        SELECT * FROM brand WHERE 1=1
+    </select>
+    <insert id="addBrand" parameterType="brand">
+        INSERT INTO brand(brandName) VALUES (#{brandName})
+    </insert>
+    <select id="queryBrand" resultType="brand">
+        SELECT * FROM brand WHERE brandId=#{brandId}
+    </select>
+    <update id="editBrand" parameterType="brand">
+        UPDATE brand SET brandName=#{brandName} WHERE brandId=#{brandId}
+    </update>
+</mapper>

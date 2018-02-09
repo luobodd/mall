@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.OrdersMapper">
+    <insert id="insertOrders" parameterType="orders">
+        INSERT INTO orders(memberId,ordersPrice) VALUES (#{memberId},#{ordersPrice})
+    </insert>
+    <select id="queryOrdersMaxId" parameterType="int" resultType="int">
+        SELECT MAX(ordersId) FROM orders WHERE memberId=#{memberId}
+    </select>
+    <select id="queryOrdersMaxIdPrice" resultType="double" parameterType="int">
+        SELECT ordersPrice FROM orders WHERE ordersId=(SELECT MAX(ordersId) FROM orders WHERE memberId=#{memberId})
+    </select>
+
+    <select id="queryMaxIdOrders" parameterType="int" resultType="orders">
+        SELECT * FROM orders WHERE ordersId=(SELECT max(ordersId) FROM orders WHERE memberId = #{memberId})
+    </select>
+    <!--<select id="queryHistoryOrders" parameterType="int" resultType="map">
+        SELECT * FROM orders,orders_detail,product WHERE orders.ordersId=orders_detail.ordersId AND orders_detail.productId=product.productId AND orders.memberId=#{memberId}
+    </select>-->
+    <resultMap id="queryMyOrderResultMap" type="orders">
+        <id column="ordersId" property="ordersId"/>
+        <result column="memberId" property="memberId"/>
+        <result column="ordersTime" property="ordersTime"/>
+        <result column="ordersPrice" property="ordersPrice"/>
+        <collection property="ordersDetails" ofType="ordersDetail">
+            <id column="productId" property="productId"/>
+            <result column="productPrice" property="productPrice"/>
+            <result column="productName" property="productName"/>
+            <result column="productNumber" property="productNumber"/>
+            <result column="express" property="express"/>
+        </collection>
+    </resultMap>
+    <select id="queryHistoryOrders" parameterType="int" resultMap="queryMyOrderResultMap">
+        SELECT od.productId productId,o.ordersId ordersId,ordersTime,ordersPrice,memberId,productName,od.productPrice,productNumber,express
+        FROM orders o,orders_detail od,product p
+        WHERE o.ordersId=od.ordersId AND od.productId=p.productId
+              AND o.ordersId=#{ordersId}
+    </select>
+    <select id="queryHistoryOrdersId" parameterType="int" resultType="int">
+        SELECT ordersId FROM orders WHERE memberId = #{memberId};
+    </select>
+
+    <select id="ordersList" resultType="map">
+        SELECT ordersId,memberName,ordersTime,ordersPrice,status FROM orders,member WHERE member.memberId=orders.memberId
+    </select>
+    <update id="ordersSuccess" parameterType="int">
+        UPDATE orders SET status=1 WHERE ordersId=#{ordersId}
+    </update>
+</mapper>

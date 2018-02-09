@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.ProductMapper">
+    <select id="productCategoryList" parameterType="map" resultType="map">
+        SELECT * FROM product,brand WHERE product.brandId=brand.brandId AND valid=1 AND 1=1
+        <if test="categoryId != null">
+            AND categoryId=#{categoryId}
+        </if>
+        <if test="brandId != null">
+            AND brandId=#{branId}
+        </if>
+        <!--<if test="start != null">
+            LIMIT #{start},5
+        </if>-->
+    </select>
+    <select id="productDetail" parameterType="int" resultType="map">
+        SELECT * FROM product WHERE productId=#{paoductId}
+    </select>
+    <select id="queryProductPrice" parameterType="int" resultType="double">
+        SELECT productPrice FROM product WHERE productId=#{productId}
+    </select>
+    <select id="selectProduct" parameterType="String" resultType="map">
+        SELECT * FROM product WHERE product.productName like LOWER(CONCAT(concat('%',#{productName}),'%'))
+    </select>
+    <select id="productList" resultType="map">
+        SELECT * FROM product,category,brand WHERE product.categoryId=category.categoryId AND product.brandId=brand.brandId
+    </select>
+    <insert id="addProduct" parameterType="product">
+        INSERT INTO product (productName, productDetail, productPrice, categoryId, brandId, productFile, productStock, productDerail1, productDerail2, productDerail3, productDerail4, productDerail5,valid) VALUES (#{productName},#{productDetail},#{productPrice},#{categoryId},#{brandId},#{productFile},#{productStock},#{productDerail1},#{productDerail2},#{productDerail3},#{productDerail4},#{productDerail5},#{valid});
+    </insert>
+    <select id="queryProduct" resultType="product">
+        SELECT * FROM product WHERE productId=#{productId}
+    </select>
+    <update id="editProduct" parameterType="product">
+        UPDATE product SET productName=#{productName},productDetail=#{productDetail},productPrice=#{productPrice},categoryId=#{categoryId},brandId=#{brandId},productStock=#{productStock},productDerail1=#{productDerail1},productDerail2=#{productDerail2},productDerail3=#{productDerail3},productDerail4=#{productDerail4},productDerail5=#{productDerail5},valid=#{valid} WHERE productId=#{productId}
+    </update>
+    <select id="querystartProduct" parameterType="int" resultType="int">
+        SELECT product.valid FROM product WHERE productId=#{productId}
+    </select>
+    <update id="startProduct" parameterType="int">
+        UPDATE product SET valid=1 WHERE productId=#{productId}
+    </update>
+    <update id="stopProduct" parameterType="int">
+        UPDATE product SET valid=0 WHERE productId=#{productId}
+    </update>
+</mapper>

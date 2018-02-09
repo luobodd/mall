@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.OrdersDetailMapper">
+    <insert id="insertOrdersDetail" parameterType="ordersDetail">
+        INSERT INTO orders_detail(ordersId, productId, productNumber, productPrice) VALUES (#{ordersId},#{productId},#{productNumber},#{productPrice})
+    </insert>
+    <select id="queryOrdersDetail" parameterType="int" resultType="map">
+        SELECT * FROM orders_detail,product WHERE orders_detail.productId=product.productId AND ordersId=#{ordersId}
+    </select>
+    <select id="queryOrdersDetailProduct" parameterType="int" resultType="map">
+        SELECT ordersId,product.productId,productName,productFile,productNumber,orders_detail.productPrice,express
+        FROM orders_detail,product
+        WHERE orders_detail.productId=product.productId AND ordersId=#{ordersId}
+    </select>
+    <update id="ordersDerailProductExpress" parameterType="ordersDetail">
+        UPDATE orders_detail SET express=#{express} WHERE ordersId=#{ordersId} AND productId=#{productId}
+    </update>
+</mapper>

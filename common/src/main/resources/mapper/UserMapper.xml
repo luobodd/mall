@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.UserMapper">
+    <select id="login" parameterType="user" resultType="int">
+        SELECT * FROM user WHERE valid=1 AND userName=#{userName} AND userPassword=#{userPassword}
+    </select>
+</mapper>

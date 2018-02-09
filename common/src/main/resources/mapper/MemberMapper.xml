@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.common.dao.MemberMapper">
+    <insert id="insertMember" parameterType="member">
+        INSERT INTO member(memberName,memberPassword,memberTel,memberMail) VALUES (#{memberName},#{memberPassword},#{memberTel},#{memberMail})
+    </insert>
+    <select id="loginMember" parameterType="map" resultType="member">
+        SELECT * FROM member WHERE valid=1 AND memberName=#{memberName} AND memberPassword=#{memberPassword}
+    </select>
+    <select id="memberList" resultType="member">
+        SELECT * FROM member WHERE 1=1
+    </select>
+    <update id="startMember" parameterType="int">
+        UPDATE member SET valid=1 WHERE memberId=#{memberId}
+    </update>
+    <update id="stopMember" parameterType="int">
+        UPDATE member SET valid=0 WHERE memberId=#{memberId}
+    </update>
+    <select id="querystartMember" parameterType="int" resultType="int">
+        SELECT member.valid FROM member WHERE memberId=#{memberId}
+    </select>
+</mapper>
