@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hwua.common.dao.AddressMapper">
+<mapper namespace="com.luobodd.common.dao.AddressMapper">
     <select id="queryMemberAddress" resultType="address">
         SELECT * FROM address WHERE memberId=#{memberId}
     </select>

@@ -6,7 +6,7 @@
     <!--读取配置文件:jdbc.properties-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!--配置自动扫描的包-->
-    <context:component-scan base-package="com.hwua.front">
+    <context:component-scan base-package="com.luobodd.front">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
@@ -38,6 +38,6 @@
     -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.hwua.common.dao"/>
+        <property name="basePackage" value="com.luobodd.common.dao"/>
     </bean>
 </beans>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hwua.common.dao.ProductMapper">
+<mapper namespace="com.luobodd.common.dao.ProductMapper">
     <select id="productCategoryList" parameterType="map" resultType="map">
         SELECT * FROM product,brand WHERE product.brandId=brand.brandId AND valid=1 AND 1=1
         <if test="categoryId != null">

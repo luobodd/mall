@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hwua.common.dao.OrdersMapper">
+<mapper namespace="com.luobodd.common.dao.OrdersMapper">
     <insert id="insertOrders" parameterType="orders">
         INSERT INTO orders(memberId,ordersPrice) VALUES (#{memberId},#{ordersPrice})
     </insert>

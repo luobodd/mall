@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--配置自动扫描组件-->
-    <context:component-scan base-package="com.hwua.admin" use-default-filters="false">
+    <context:component-scan base-package="com.luobodd.admin" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
@@ -37,7 +37,7 @@
     <context:property-placeholder location="classpath:conf.properties"/>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-    <bean class="com.hwua.admin.controller.ProductContrtller">
+    <bean class="com.luobodd.admin.controller.ProductContrtller">
         <property name="accessKey" value="${qiniu.accessKey}"/>
         <property name="secretKey" value="${qiniu.secretKey}"/>
         <property name="bucket" value="${qiniu.bucket}"/>

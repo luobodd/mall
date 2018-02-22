@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hwua.common.dao.BrandMapper">
+<mapper namespace="com.luobodd.common.dao.BrandMapper">
     <select id="brandList" resultType="brand">
         SELECT * FROM brand WHERE 1=1
     </select>

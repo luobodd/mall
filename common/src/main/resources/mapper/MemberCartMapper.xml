@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hwua.common.dao.MemberCartMapper">
+<mapper namespace="com.luobodd.common.dao.MemberCartMapper">
     <insert id="insertProduct" parameterType="memberCart">
         INSERT INTO member_cart(memberId,productId,productInCartNumber) VALUES (#{memberId},#{productId},#{productInCartNumber})
     </insert>
